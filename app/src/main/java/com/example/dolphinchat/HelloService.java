@@ -74,5 +74,5 @@ public class HelloService extends Service {
     public void onDestroy() {
         Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
     }
-}
+
 }
