@@ -1,7 +1,10 @@
 package com.example.dolphinchat;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -9,6 +12,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 public class HelloService extends Service {
     private Looper serviceLooper;
@@ -50,9 +55,27 @@ public class HelloService extends Service {
         serviceHandler = new ServiceHandler(serviceLooper);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
+
+        //Send notification for service start.
+        Intent notificationIntent = new Intent(this, MainActivity.class);
+        PendingIntent pendingIntent =
+                PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+        Notification notification =
+                new Notification.Builder(this, "CHANNEL_DEFAULT_IMPORTANCE")
+                        .setContentTitle("Hello Service")
+                        .setContentText("Hello Service Running")
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setContentIntent(pendingIntent)
+                        .setTicker("Hello Service Running")
+                        .build();
+
+        // Notification ID cannot be 0.
+        startForeground(1, notification);
 
         // For each start request, send a message to start a job and deliver the
         // start ID so we know which request we're stopping when we finish the job
