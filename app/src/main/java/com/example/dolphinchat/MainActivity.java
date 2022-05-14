@@ -60,7 +60,10 @@ public class MainActivity extends AppCompatActivity {
         context.startForegroundService(intent);
     }
 
-    private void startAudioRecordingService() {
-
+    private void startAudioRecordingService(String fileName) {
+        Context context = getApplicationContext();
+        Intent intent = new Intent(this, AudioRecorderService.class);
+        intent.putExtra("fileName", fileName);
+        context.startForegroundService(intent);
     }
 }
