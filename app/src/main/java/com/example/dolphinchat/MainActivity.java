@@ -22,11 +22,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Create a notification channel so we can send notifications(Required for Foreground Service)
         createNotificationChannelDefault();
-
+        //Set up hello service button to start hello foreground service.
         Button startHelloServiceButton = (Button) findViewById(R.id.startHelloServiceButton);
-
-        //Set up hello service button to start hello service.
         startHelloServiceButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
