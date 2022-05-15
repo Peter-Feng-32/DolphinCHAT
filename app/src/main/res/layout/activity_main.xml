@@ -47,8 +47,22 @@
         android:id="@+id/btn_stop_recording"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="444dp"
         android:text="Stop Recording Service"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextStopRecording"
+        android:layout_width="385dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="372dp"
+        android:editable="true"
+        android:ems="10"
+        android:hint="Type STOP here and press the button to stop recording."
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

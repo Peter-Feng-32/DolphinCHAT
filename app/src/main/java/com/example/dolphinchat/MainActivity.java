@@ -17,6 +17,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -124,7 +126,12 @@ public class MainActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         Intent intent = new Intent(this, AudioRecorderService.class);
         if(AudioRecorderService.isRunning()) {
-            context.stopService(intent);
+            EditText stopBox = (EditText) findViewById(R.id.editTextStopRecording);
+            if(stopBox.getText().toString().equals("STOP")) {
+                context.stopService(intent);
+            } else {
+                Toast.makeText(this, "Type \"STOP\" in the text box.", Toast.LENGTH_SHORT).show();
+            }
         } else {
             /*
             For Testing Purposes only.
