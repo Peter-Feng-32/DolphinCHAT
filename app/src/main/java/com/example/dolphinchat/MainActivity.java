@@ -13,14 +13,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.File;
+import org.tensorflow.lite.task.audio.classifier.AudioClassifier;
+import org.tensorflow.lite.task.audio.classifier.AudioClassifier.AudioClassifierOptions;
+import org.tensorflow.lite.task.core.BaseOptions;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void test() throws IOException {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +74,11 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                startHelloService();
+                try {
+                    test();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         Button startAudioRecordingButton = (Button) findViewById(R.id.btn_start_recording);
@@ -117,7 +128,6 @@ public class MainActivity extends AppCompatActivity {
     private void startAudioRecordingService(String fileName) {
         Context context = getApplicationContext();
         Intent intent = new Intent(this, AudioRecorderService.class);
-        intent.putExtra("fileName", fileName);
         if(!AudioRecorderService.isRunning()) {
             context.startForegroundService(intent);
         }
