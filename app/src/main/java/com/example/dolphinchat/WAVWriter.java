@@ -188,6 +188,8 @@ class WavWriter {
         }
         framesWritten += numOfReadShort;
         try {
+            Log.w("pushAudioShort()", byteBuffer.length + " " + numOfReadShort * 2);
+
             out.write(byteBuffer, 0, numOfReadShort*2);
             // if use out.write(byte), then a lot of GC will generated
         } catch (IOException e) {
